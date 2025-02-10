@@ -9,6 +9,9 @@ public class RubyController : MonoBehaviour
     public float moveSpeed = 4.0f; 
     public int maxHealth = 5;
     public int health { get { return currentHealth; }}
+    public float timeInvincible = 2.0f;
+    private bool isInvincible;
+    private float invicibleTimer;
     private int currentHealth;
     private Rigidbody2D rb2d;
     private void Start()
@@ -29,10 +32,25 @@ public class RubyController : MonoBehaviour
         position.x += moveSpeed * horizontal * Time.deltaTime;
         position.y += moveSpeed * vertical * Time.deltaTime;
         rb2d.MovePosition(position);
+
+        if (isInvincible)
+        {
+            invicibleTimer -= Time.deltaTime;
+            if (invicibleTimer < 0)
+                isInvincible = false;
+        }
     }
 
     public void ChangeHealth(int amount)
     {
+        if (amount < 0)
+        {
+            if (isInvincible)
+                return;
+
+            isInvincible = true;
+            invicibleTimer = timeInvincible;
+        }
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log($"{currentHealth}/{maxHealth}");
     }

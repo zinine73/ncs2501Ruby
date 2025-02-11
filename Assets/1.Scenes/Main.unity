@@ -860,6 +860,14 @@ PrefabInstance:
       propertyPath: vertical
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4438618217122388450, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
+      propertyPath: moveSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438618217122388450, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
+      propertyPath: changeTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4438618217122388454, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1100,6 +1108,14 @@ PrefabInstance:
       propertyPath: vertical
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4438618217122388450, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
+      propertyPath: moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438618217122388450, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
+      propertyPath: changeTime
+      value: 1.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4438618217122388454, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1110,7 +1126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4438618217122388454, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 4438618217122388454, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6502,6 +6518,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1563858700106635110, guid: 1f69ac7209ce05047b119bf3a9ff68fa, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563858700106635110, guid: 1f69ac7209ce05047b119bf3a9ff68fa, type: 3}
+      propertyPath: m_FlipY
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1563858700106635160, guid: 1f69ac7209ce05047b119bf3a9ff68fa, type: 3}
       propertyPath: m_Name
       value: CollectibleHealth
@@ -6622,7 +6646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3856089561918961386, guid: 4e5d5ddbd5238d44eb3e7d1cd983af8d, type: 3}
       propertyPath: moveSpeed
-      value: 50
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7950517774144638423, guid: 4e5d5ddbd5238d44eb3e7d1cd983af8d, type: 3}
       propertyPath: m_SleepingMode
@@ -6640,6 +6664,14 @@ PrefabInstance:
     - target: {fileID: 4438618217122388445, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
       propertyPath: m_Name
       value: Bot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438618217122388450, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
+      propertyPath: moveSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438618217122388450, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
+      propertyPath: changeTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4438618217122388451, guid: ca6082943fd6d9b4bb0567b6550b6b75, type: 3}
       propertyPath: m_Enabled

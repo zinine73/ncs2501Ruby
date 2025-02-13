@@ -68,15 +68,12 @@ public class EnemyController : MonoBehaviour
 
     public void Fix()
     {
+        fixedCount++;
         if (fixedCount >= needFix)
         {
             broken = false;
             rb2d.simulated = false;
             animator.SetTrigger("Fixed");
-        }
-        else
-        {
-            fixedCount++;
         }
     }
 }

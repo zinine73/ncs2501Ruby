@@ -14,6 +14,7 @@ public class RubyController : MonoBehaviour
     public int health { get { return currentHealth; }}
     public float timeInvincible = 2.0f;
     public GameObject projectilePrefab;
+    public ParticleSystem collEffectPrefab;
 
     private bool isInvincible;
     private float invicibleTimer;
@@ -28,6 +29,7 @@ public class RubyController : MonoBehaviour
         currentHealth = maxHealth;
         position = rb2d.position;
         animator = GetComponent<Animator>();
+        collEffectPrefab.Stop();
     }
 
     private void Update()
@@ -72,6 +74,7 @@ public class RubyController : MonoBehaviour
     {
         if (amount < 0)
         {
+            collEffectPrefab.Play();
             animator.SetTrigger("Hit");
             if (isInvincible)
                 return;

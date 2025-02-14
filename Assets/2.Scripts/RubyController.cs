@@ -29,7 +29,6 @@ public class RubyController : MonoBehaviour
         currentHealth = maxHealth;
         position = rb2d.position;
         animator = GetComponent<Animator>();
-        collEffectPrefab.Stop();
     }
 
     private void Update()
@@ -74,16 +73,19 @@ public class RubyController : MonoBehaviour
     {
         if (amount < 0)
         {
-            collEffectPrefab.Play();
             animator.SetTrigger("Hit");
             if (isInvincible)
                 return;
 
             isInvincible = true;
             invicibleTimer = timeInvincible;
+            //Instantiate(collEffectPrefab, transform);
+            Instantiate(collEffectPrefab, 
+                rb2d.position + Vector2.up * 0.2f, Quaternion.identity);
         }
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        Debug.Log($"{currentHealth}/{maxHealth}");
+        //Debug.Log($"{currentHealth}/{maxHealth}");
+        UIHealthBar.instance.SetValue(currentHealth/(float)maxHealth);
     }
 
     private void Launch()

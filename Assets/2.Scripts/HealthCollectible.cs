@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HealthCollectible : MonoBehaviour
 {
+    public ParticleSystem getEffect;
     private void OnTriggerEnter2D(Collider2D other)
     {
         RubyController controller = other.GetComponent<RubyController>();
@@ -12,8 +13,10 @@ public class HealthCollectible : MonoBehaviour
         {
             if (controller.health < controller.maxHealth)
             {
+                Instantiate(getEffect, transform);
                 controller.ChangeHealth(1);
-                Destroy(gameObject);
+                GetComponent<SpriteRenderer>().enabled = false;
+                Destroy(gameObject, 3.0f);
             }
         }
     }

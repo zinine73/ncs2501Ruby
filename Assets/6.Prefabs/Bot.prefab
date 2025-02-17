@@ -153,6 +153,7 @@ MonoBehaviour:
   changeTime: 3
   needFix: 3
   smokeEffect: {fileID: 945829459053575198}
+  dialogBox: {fileID: 7910887199712399095, guid: 96114c8ff850438479d8543644149bc1, type: 3}
 --- !u!95 &5007480555984986050
 Animator:
   serializedVersion: 5

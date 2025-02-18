@@ -15,6 +15,8 @@ public class RubyController : MonoBehaviour
     public float timeInvincible = 2.0f;
     public GameObject projectilePrefab;
     public ParticleSystem collEffectPrefab;
+    public AudioClip throwClip;
+    public AudioClip hitClip;
 
     private bool isInvincible;
     private float invicibleTimer;
@@ -23,12 +25,15 @@ public class RubyController : MonoBehaviour
     private Vector2 position;
     private Animator animator;
     private Vector2 lookDirection = new Vector2(1,0);
+    private AudioSource audioSource;
+
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         position = rb2d.position;
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -101,6 +106,7 @@ public class RubyController : MonoBehaviour
             //Instantiate(collEffectPrefab, transform);
             Instantiate(collEffectPrefab, 
                 rb2d.position + Vector2.up * 0.2f, Quaternion.identity);
+            PlaySound(hitClip);
         }
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         //Debug.Log($"{currentHealth}/{maxHealth}");
@@ -118,5 +124,11 @@ public class RubyController : MonoBehaviour
         projectile.Launch(lookDirection, FORCE_PT);
 
         animator.SetTrigger("Launch");
+        PlaySound(throwClip);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }

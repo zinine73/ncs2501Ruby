@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     public float changeTime = 3.0f;
     public int needFix = 3;
     public ParticleSystem smokeEffect;
+    public AudioClip fixedClip;
 
     private Rigidbody2D rb2d;
     private float timer;
@@ -18,6 +19,7 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
     private bool broken;
     private int fixedCount;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -76,6 +78,10 @@ public class EnemyController : MonoBehaviour
             rb2d.simulated = false;
             animator.SetTrigger("Fixed");
             smokeEffect.Stop();
+            // Ruby에게 fixed 알리기
+            RubyController ruby = GameObject.FindWithTag("RUBY")
+                .GetComponent<RubyController>();
+            ruby.PlaySound(fixedClip);
         }
     }
 }

@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public int needFix = 3;
     public ParticleSystem smokeEffect;
     public AudioClip fixedClip;
+    public AudioClip completedClip;
 
     private Rigidbody2D rb2d;
     private float timer;
@@ -82,6 +83,12 @@ public class EnemyController : MonoBehaviour
             RubyController ruby = GameObject.FindWithTag("RUBY")
                 .GetComponent<RubyController>();
             ruby.PlaySound(fixedClip);
+            // jambi에게 fixed 알리기
+            NPC jambi = GameObject.FindWithTag("JAMBI").GetComponent<NPC>();
+            if (jambi.NoticeRobotFixed())
+            {
+                ruby.PlaySound(completedClip);
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ public class RubyController : MonoBehaviour
     public ParticleSystem collEffectPrefab;
     public AudioClip throwClip;
     public AudioClip hitClip;
+    public GameObject AndroidPanel;
 
     private bool isInvincible;
     private float invicibleTimer;
@@ -26,26 +27,36 @@ public class RubyController : MonoBehaviour
     private Animator animator;
     private Vector2 lookDirection = new Vector2(1,0);
     private AudioSource audioSource;
+    private PlayerMove moves;
 
     private void Start()
     {
+#if (UNITY_ANDROID)
+        AndroidPanel.SetActive(true);
+#else
+        AndroidPanel.SetActive(false);
+#endif
         rb2d = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         position = rb2d.position;
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        moves = GetComponent<PlayerMove>();
     }
 
     private void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
         // GetAxisLaw를 사용하면 -1,1값이 넘어온다
         //float vertical = Input.GetAxisRaw("Vertical");
         //Debug.Log($"H:{horizontal}");
         //Debug.Log($"V:{vertical}");
-        
+#if (!UNITY_ANDROID)
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
         Vector2 move = new Vector2(horizontal, vertical);
+#else
+        Vector2 move = moves.MoveInput.normalized;
+#endif
         if (!Mathf.Approximately(move.x, 0.0f) ||
             !Mathf.Approximately(move.y, 0.0f))
             {
@@ -75,21 +86,7 @@ public class RubyController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            RaycastHit2D hit = Physics2D.Raycast(
-                rb2d.position + Vector2.up * 0.2f,
-                lookDirection,
-                1.5f,
-                LayerMask.GetMask("NPC"));
-            if (hit.collider != null)
-            {
-                //Debug.Log("Raycast has hit " + hit.collider.gameObject);
-                //NPC jambi = hit.collider.GetComponent<NPC>();
-                //if (jambi != null)
-                if (hit.collider.TryGetComponent<NPC>(out var jambi))
-                {
-                    jambi.DisplayDialog();
-                }
-            }
+            Talk();
         }
     }
 
@@ -113,7 +110,7 @@ public class RubyController : MonoBehaviour
         UIHealthBar.instance.SetValue(currentHealth/(float)maxHealth);
     }
 
-    private void Launch()
+    public void Launch()
     {
         GameObject projectileObject = Instantiate(
             projectilePrefab, 
@@ -125,6 +122,25 @@ public class RubyController : MonoBehaviour
 
         animator.SetTrigger("Launch");
         PlaySound(throwClip);
+    }
+
+    public void Talk()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(
+                rb2d.position + Vector2.up * 0.2f,
+                lookDirection,
+                1.5f,
+                LayerMask.GetMask("NPC"));
+        if (hit.collider != null)
+        {
+            //Debug.Log("Raycast has hit " + hit.collider.gameObject);
+            //NPC jambi = hit.collider.GetComponent<NPC>();
+            //if (jambi != null)
+            if (hit.collider.TryGetComponent<NPC>(out var jambi))
+            {
+                jambi.DisplayDialog();
+            }
+        }
     }
 
     public void PlaySound(AudioClip clip)
